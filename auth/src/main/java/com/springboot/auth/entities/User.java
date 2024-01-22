@@ -31,7 +31,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ExistsByUsername
+	
 	@NotBlank
 	@Size(min = 4, max = 13)
 	@Column(unique = true)
@@ -118,7 +118,6 @@ public class User {
 		return Objects.hash(id, username);
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -128,6 +127,9 @@ public class User {
 		User other = (User) obj;
 		return Objects.equals(id, other.id) && Objects.equals(username, other.username);
 	}
+
+	
+	
 	
 	
 
