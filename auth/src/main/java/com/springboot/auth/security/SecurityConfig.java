@@ -34,7 +34,8 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http.authorizeHttpRequests((authz) -> authz
-				.requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+				.requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
+				.requestMatchers(HttpMethod.POST, "/api/users").hasRole("ADMIN")
 				.anyRequest().authenticated())
 				.addFilter(new JwtAuthenticationFilter(authenticationManager()))
 				.addFilter(new JwtValidationFilter(authenticationManager()))

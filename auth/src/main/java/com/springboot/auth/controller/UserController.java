@@ -25,15 +25,22 @@ public class UserController {
 	private IUserService userService;
 	
 	@PostMapping()
-	public ResponseEntity<?> save(@Valid @RequestBody User user, BindingResult result){
-		
+	public ResponseEntity<?> create(@Valid @RequestBody User user, BindingResult result) {
+
 		if (result.hasFieldErrors()) {
 			return validation(result);
 		}
-		
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(userService.save(user));
-		
+		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
+	}
+
+	
+	@PostMapping("/register")
+	public ResponseEntity<?> register(@Valid @RequestBody User user, BindingResult result) {
+
+		user.setAdmin(false);
+
+		return create(user, result);
+
 	}
 	
 	

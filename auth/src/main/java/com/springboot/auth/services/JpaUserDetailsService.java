@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.auth.entities.User;
 import com.springboot.auth.repositories.UserRespository;
@@ -19,6 +20,7 @@ public class JpaUserDetailsService implements UserDetailsService{
 	@Autowired
 	private UserRespository userRespository;
 	
+	@Transactional(readOnly = true)
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		

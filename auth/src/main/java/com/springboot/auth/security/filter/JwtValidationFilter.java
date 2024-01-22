@@ -53,8 +53,9 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
 			Object authoritiesClaims = claims.get("authorities");
 
 			Collection<? extends GrantedAuthority> authorities = Arrays.asList(
-					new ObjectMapper().addMixIn(SimpleGrantedAuthority.class, SimpleGrantedAuthorityJsonCreator.class)
-							.readValue(authoritiesClaims.toString().getBytes(), SimpleGrantedAuthority[].class));
+					new ObjectMapper().addMixIn(SimpleGrantedAuthority.class,
+							SimpleGrantedAuthorityJsonCreator.class)
+						.readValue(authoritiesClaims.toString().getBytes(), SimpleGrantedAuthority[].class));
 
 			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
 					null, authorities);
